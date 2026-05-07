@@ -1,8 +1,9 @@
 # MasAvisos — Local Services Dispatch Platform
 
-MasAvisos is a Madrid-first local services platform that connects homeowners with verified professionals through WhatsApp-based job alerts.
+🔗 Production: https://masavisos.es
 
-The project focuses on fast lead qualification, service-area matching, WhatsApp dispatch, and local SEO acquisition.
+Madrid-first local services platform connecting homeowners with verified professionals through WhatsApp-based dispatch, local SEO, and intelligent lead routing.
+
 
 ## Architecture
 
