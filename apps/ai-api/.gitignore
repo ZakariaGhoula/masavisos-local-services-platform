@@ -51,6 +51,9 @@ htmlcov/
 *.log
 logs/
 
+# Runtime data
+data/
+
 # Local databases
 *.db
 *.sqlite

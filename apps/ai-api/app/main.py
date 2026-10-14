@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 
 load_dotenv(".env.local")
 
-from app.ai import generate_response
+from app.ai import generate_ai_result
 from app.whatsapp import send_whatsapp_message
 
 app = FastAPI(title="Masavisos AI")
@@ -45,10 +45,10 @@ async def verify_webhook(request: Request):
 
 async def process_message(phone: str, text: str):
     try:
-        answer = await asyncio.to_thread(
-            generate_response, phone, text
+        result = await asyncio.to_thread(
+            generate_ai_result, phone, text
         )
-        await send_whatsapp_message(phone, answer)
+        await send_whatsapp_message(phone, result.response)
     except Exception:
         logger.exception("Failed to process WhatsApp message")
 
@@ -98,15 +98,17 @@ class MessageRequest(BaseModel):
 @app.post("/messages")
 async def send_message(request: MessageRequest):
     try:
-        answer = await asyncio.to_thread(
-            generate_response,
+        result = await asyncio.to_thread(
+            generate_ai_result,
             request.phone,
             request.message,
         )
 
         return {
             "phone": request.phone,
-            "response": answer,
+            "response": result.response,
+            "record": result.record,
+            "saved_path": result.saved_path,
         }
 
     except Exception:
